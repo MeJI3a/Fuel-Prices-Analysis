@@ -1,0 +1,85 @@
+Microsoft Windows [Version 10.0.19045.5371]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Zana>s3 ls s3
+'s3' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\Zana>aws s3 ls
+2025-01-21 14:28:26 amazons3deepdive-bucket-website-zana-study
+2025-01-23 10:17:25 amazons3deeptdive-zana-test
+2025-01-21 14:03:36 supply-chain-data-bucket-zana-2025
+
+C:\Users\Zana>aws s3api create-bucket --bucket bucket-fuel-analysis-2019-2024-zs --region eu-west-2 --create-bucket-configuration LocationConstraint=eu-west-2
+{
+    "Location": "http://bucket-fuel-analysis-2019-2024-zs.s3.amazonaws.com/"
+}
+
+
+C:\Users\Zana>aws s3 ls
+2025-01-21 14:28:26 amazons3deepdive-bucket-website-zana-study
+2025-01-23 10:17:25 amazons3deeptdive-zana-test
+2025-02-10 09:03:40 bucket-fuel-analysis-2019-2024-zs
+2025-01-21 14:03:36 supply-chain-data-bucket-zana-2025
+
+C:\Users\Zana>aws s3 cp "C:\Users\Zana\Desktop\fuel-analytics\5.S3\for S3" s3://bucket-fuel-analysis-2019-2024-zs/ --recursive
+upload: Desktop\fuel-analytics\5.S3\for S3\filtered_oil_prices.csv to s3://bucket-fuel-analysis-2019-2024-zs/filtered_oil_prices.csv
+upload: Desktop\fuel-analytics\5.S3\for S3\inflation_cleaned.csv to s3://bucket-fuel-analysis-2019-2024-zs/inflation_cleaned.csv
+upload: Desktop\fuel-analytics\5.S3\for S3\fuel_prices_cleaned.csv to s3://bucket-fuel-analysis-2019-2024-zs/fuel_prices_cleaned.csv
+upload: Desktop\fuel-analytics\5.S3\for S3\cleaned_currency.csv to s3://bucket-fuel-analysis-2019-2024-zs/cleaned_currency.csv
+
+C:\Users\Zana>aws s3 ls s3://bucket-fuel-analysis-2019-2024-zs/
+2025-02-10 09:04:45      72128 cleaned_currency.csv
+2025-02-10 09:04:45       1318 filtered_oil_prices.csv
+2025-02-10 09:04:45      18695 fuel_prices_cleaned.csv
+2025-02-10 09:04:45       1168 inflation_cleaned.csv
+
+C:\Users\Zana>aws s3api put-bucket-lifecycle-configuration --bucket bucket-fuel-analysis-2019-2024-zs --lifecycle-configuration file://C:\Users\Zana\Desktop\fuel-analytics\5.S3\S3\lifecycle.json
+{
+    "TransitionDefaultMinimumObjectSize": "all_storage_classes_128K"
+}
+
+
+C:\Users\Zana>aws s3api get-bucket-lifecycle-configuration --bucket bucket-fuel-analysis-2019-2024-zs
+{
+    "TransitionDefaultMinimumObjectSize": "all_storage_classes_128K",
+    "Rules": [
+        {
+            "Expiration": {
+                "Days": 180
+            },
+            "ID": "MoveToIA",
+            "Prefix": "",
+            "Status": "Enabled",
+            "Transitions": [
+                {
+                    "Days": 30,
+                    "StorageClass": "STANDARD_IA"
+                },
+                {
+                    "Days": 60,
+                    "StorageClass": "GLACIER"
+                }
+            ]
+        }
+    ]
+}
+
+C:\Users\Zana>aws s3api put-public-access-block --bucket bucket-fuel-analysis-2019-2024-zs --public-access-block-configuration BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
+C:\Users\Zana>aws s3api put-bucket-encryption --bucket bucket-fuel-analysis-2019-2024-zs --server-side-encryption-configuration file://C:\Users\Zana\Desktop\fuel-analytics\5.S3\S3\encryption.json
+C:\Users\Zana>aws s3api get-bucket-encryption --bucket bucket-fuel-analysis-2019-2024-zs
+{
+    "ServerSideEncryptionConfiguration": {
+        "Rules": [
+            {
+                "ApplyServerSideEncryptionByDefault": {
+                    "SSEAlgorithm": "AES256"
+                },
+                "BucketKeyEnabled": false
+            }
+        ]
+    }
+}
+
+
+C:\Users\Zana>

@@ -1,0 +1,54 @@
+C:\Users\Zana>aws iam create-policy --policy-name SnowflakeS3Access --policy-document file://C:\Users\Zana\Desktop\fuel-analytics\5.S3\S3\snowflake_iam_policy.json
+{
+    "Policy": {
+        "PolicyName": "SnowflakeS3Access",
+        "PolicyId": "ANPAXKPUZOBD44J46CC7Z",
+        "Arn": "arn:aws:iam::503561416775:policy/SnowflakeS3Access",
+        "Path": "/",
+        "DefaultVersionId": "v1",
+        "AttachmentCount": 0,
+        "PermissionsBoundaryUsageCount": 0,
+        "IsAttachable": true,
+        "CreateDate": "2025-02-10T09:27:00+00:00",
+        "UpdateDate": "2025-02-10T09:27:00+00:00"
+    }
+}
+
+
+C:\Users\Zana>C:\Users\Zana>aws iam create-role --role-name SnowflakeS3Role --assume-role-policy-document file://C:\Users\Zana\Desktop\fuel-analytics\5.S3\S3\trust_policy.json
+{
+    "Role": {
+        "Path": "/",
+        "RoleName": "SnowflakeS3Role",
+        "RoleId": "AROAXKPUZOBDVF2JNX45J",
+        "Arn": "arn:aws:iam::503561416775:role/SnowflakeS3Role",
+        "CreateDate": "2025-02-10T09:30:30+00:00",
+        "AssumeRolePolicyDocument": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Allow",
+                    "Principal": {
+                        "Service": "s3.amazonaws.com"
+                    },
+                    "Action": "sts:AssumeRole"
+                }
+            ]
+        }
+    }
+}
+
+C:\Users\Zana>aws iam attach-role-policy --role-name SnowflakeS3Role --policy-arn arn:aws:iam::503561416775:policy/SnowflakeS3Access
+
+C:\Users\Zana>aws iam list-attached-role-policies --role-name SnowflakeS3Role
+{
+    "AttachedPolicies": [
+        {
+            "PolicyName": "SnowflakeS3Access",
+            "PolicyArn": "arn:aws:iam::503561416775:policy/SnowflakeS3Access"
+        }
+    ]
+}
+
+
+C:\Users\Zana>

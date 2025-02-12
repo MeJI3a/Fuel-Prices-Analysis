@@ -1,0 +1,16 @@
+{
+    "AssumeRolePolicyDocument": {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": "Allow",
+                "Principal": {
+                    "Service": "snowflake.amazonaws.com"
+                },
+                "Action": "sts:AssumeRole"
+            }
+        ]
+    },
+    "RoleName": "SnowflakeS3Role",
+    "Description": "IAM Role to allow Snowflake to access S3 bucket"
+}
