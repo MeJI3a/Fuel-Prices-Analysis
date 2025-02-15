@@ -29,14 +29,32 @@ This project analyzes UK fuel prices, inflation, oil prices, and currency exchan
   - Added **interactive filters** (date range)
 - Published to Power BI Service (**[https://app.powerbi.com/groups/me/reports/d9e87e16-b1a0-4204-9f23-495a027f9fb8/76a4473d01533534e860?experience=power-bi]**)
 
+
+### **8. Deep Analysis (Completed)**
+- **Step 8.1 - Data Validation & Cleaning**  
+  - Ensured data consistency, handled missing values
+- **Step 8.2 - Snowflake Connection & Queries**  
+  - Extracted and structured data from Snowflake
+- **Step 8.3 - Merging Key Variables**  
+  - Aligned datasets (Fuel, Oil, Currency, Inflation) into a unified structure
+- **Step 8.4 - Normalization (2019 = 100%)**  
+  - Scaled all values relative to **2019** to detect trends  
+- **Step 8.5 - Statistical Summary & Outlier Detection**  
+  - Identified anomalies in fuel prices, oil prices, and exchange rates
+- **Step 8.6 - Economic Event Correlation Analysis**  
+  - Measured impact of major **geopolitical events** (sanctions, inflation, war)
+- **Step 8.7 - Findings**  
+  - Fuel prices **became highly sensitive to oil prices post-2020**  
+  - **Inflation had weaker direct impact** than supply chain disruptions  
+  - **The Russia-Ukraine War was the largest fuel price shock**  
+  - Fuel price fluctuations **increased 4x after 2020**  
+  - **Lag analysis** confirmed a **33-day delay** in fuel prices reacting to oil changes  
+
+
 ---
 
 ## Next Steps
 
-### **8. Deep Analysis**
-- Normalize all values to **2019 = 100%**
-- Analyze fuel price dependencies after scaling
-- Compare trends with key **economic events** (sanctions, crises)
 
 ### **9. Machine Learning**
 - Build predictive models for fuel price forecasting
